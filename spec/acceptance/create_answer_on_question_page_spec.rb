@@ -17,5 +17,12 @@ feature 'Create question', %q{
     click_on 'Post your answer'
 
     expect(page).to have_content "answer_body"
+
+    scenario 'Non-authenticated user creates answer' do
+      visit question_path(question)
+      click_on 'Post your answer'
+
+      expect(page).to have_content 'You need to sign in'
+    end
   end
 end
