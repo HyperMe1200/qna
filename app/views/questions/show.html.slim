@@ -11,6 +11,8 @@ h2 Answers
 
 - @question.answers.each do |a|
     p = a.body
+    - if current_user == a.user
+      = link_to 'Delete answer', answer_path(a), method: :delete
 
 = form_for [@question, Answer.new] do |f|
   p = f.label :body, 'Input your answer:'

@@ -4,6 +4,7 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
+    @answer.user = current_user
 
     if @answer.save
       redirect_to @question
@@ -11,6 +12,17 @@ class AnswersController < ApplicationController
       flash[:notice] = 'Your answer was not saved.'
       render 'questions/show'
     end
+  end
+
+  def destroy
+    @answer = Answer.find(params[:id])
+    if current_user == @answer.user
+      @answer.destroy
+      flash[:notice] = 'Your answer successfully deleted.'
+    else
+      flash[:notice] = 'You cannot delete this answer.'
+    end
+    redirect_to question_path(@answer.question)
   end
 
   private
