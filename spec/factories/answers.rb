@@ -1,6 +1,6 @@
 FactoryGirl.define do
   sequence :body do |n|
-    "MyString#{n}"
+    "Answer#{n}"
   end
 
   factory :answer do
