@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   def create
     @question = Question.find(params[:question_id])
@@ -8,7 +8,8 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to @question
     else
-      render :new
+      flash[:notice] = 'Your answer was not saved.'
+      render 'questions/show'
     end
   end
 
