@@ -1,6 +1,5 @@
 h1 Question
 
-
 - if current_user && current_user.author_of?(@question)
   = link_to 'Delete question', question_path, method: :delete
 
@@ -14,7 +13,8 @@ h2 Answers
     - if current_user && current_user.author_of?(answer)
       = link_to 'Delete answer', answer, method: :delete
 
-= form_for [@question, Answer.new] do |f|
+= form_for [@question, @answer] do |f|
+  = render 'common/errors', resource: @answer
   p = f.label :body, 'Input your answer:'
   p = f.text_area :body
   p = f.submit 'Post your answer'
