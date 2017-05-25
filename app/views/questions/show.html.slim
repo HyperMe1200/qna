@@ -9,8 +9,9 @@ p = @question.body
 h2 Answers
 
 - @question.answers.each do |answer|
+  - unless answer.new_record?
     p = answer.body
-    - if current_user && current_user.author_of?(answer)
+    - if user_signed_in? && current_user.author_of?(answer)
       = link_to 'Delete answer', answer, method: :delete
 
 = form_for [@question, @answer] do |f|

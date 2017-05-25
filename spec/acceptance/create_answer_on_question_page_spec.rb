@@ -25,4 +25,11 @@ feature 'Create question', %q{
 
     expect(page).to have_content 'need to sign in'
   end
+
+  scenario 'Authenticated user creates non-valid answer' do
+    sign_in(user)
+    visit question_path(question)
+    click_on 'Post your answer'
+    expect(page).to have_content "Body can't be blank"
+  end
 end
