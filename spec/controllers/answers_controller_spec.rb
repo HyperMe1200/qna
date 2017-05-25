@@ -12,6 +12,9 @@ RSpec.describe AnswersController, type: :controller do
       it 'saves new answer in database' do
         expect { post :create, params: params }.to change(question.answers, :count).by(1)
       end
+      it 'associates new answer with user' do
+        expect { post :create, params: params }.to change(@user.answers, :count).by(1)
+      end
       it 'redirects to show view' do
         post :create, params: params
         expect(response).to redirect_to assigns(:question)
