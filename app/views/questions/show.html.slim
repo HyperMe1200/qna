@@ -1,7 +1,7 @@
 h1 Question
 
 
-- if current_user == @question.user
+- if current_user && current_user.author_of?(@question)
   = link_to 'Delete question', question_path, method: :delete
 
 p = @question.title
@@ -9,10 +9,10 @@ p = @question.body
 
 h2 Answers
 
-- @question.answers.each do |a|
-    p = a.body
-    - if current_user == a.user
-      = link_to 'Delete answer', answer_path(a), method: :delete
+- @question.answers.each do |answer|
+    p = answer.body
+    - if current_user && current_user.author_of?(answer)
+      = link_to 'Delete answer', answer, method: :delete
 
 = form_for [@question, Answer.new] do |f|
   p = f.label :body, 'Input your answer:'

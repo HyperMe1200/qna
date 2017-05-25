@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_question, only: [:destroy, :update, :show, :edit]
 
   def index
@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if current_user == @question.user
+    if current_user.author_of?(@question)
       @question.destroy
       flash[:notice] = 'Your question successfully deleted.'
     else
