@@ -22,4 +22,9 @@ feature 'Delete question', %q{
     click_on 'Delete question'
     expect(page).to_not have_content (question.title)
   end
+
+  scenario 'Delete question as an non-authenticated user' do
+    visit question_path(question)
+    expect(page).to_not have_content 'Delete question'
+  end
 end
