@@ -9,7 +9,7 @@ feature 'Create question', %q{
   given(:user) { create :user }
   given(:question) { create :question }
 
-  scenario 'Authenticated user creates answer' do
+  scenario 'Authenticated user creates answer', js: true do
     sign_in(user)
     visit question_path(question)
 
@@ -26,8 +26,9 @@ feature 'Create question', %q{
     expect(page).to have_content 'need to sign in'
   end
 
-  scenario 'Authenticated user creates non-valid answer' do
+  scenario 'Authenticated user creates non-valid answer', js: true do
     sign_in(user)
+    sleep 3
     visit question_path(question)
     click_on 'Post your answer'
     expect(page).to have_content "Body can't be blank"
