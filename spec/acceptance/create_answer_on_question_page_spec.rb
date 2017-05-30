@@ -28,7 +28,6 @@ feature 'Create question', %q{
 
   scenario 'Authenticated user creates non-valid answer', js: true do
     sign_in(user)
-    sleep 3
     visit question_path(question)
     click_on 'Post your answer'
     expect(page).to have_content "Body can't be blank"
