@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-    @answer.save || flash[:notice] = 'Your answer was not saved.'
+    @answer.save
   end
 
   def destroy
