@@ -7,7 +7,7 @@ p = @question.title
 p = @question.body
 
 .answers
-= render @question.answers
+  = render @question.answers
 
 = form_for [@question, @answer], remote: true do |f|
   = render 'common/errors', resource: @answer
