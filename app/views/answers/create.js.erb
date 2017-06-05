@@ -1,7 +1,7 @@
 $('.errors').remove();
 $('.notice').remove();
 <% if @answer.errors.any? %>
-  $('.answers').append('<%= j render 'common/errors', resource: @answer %>');
+  $('#answer_body').before('<%= j render 'common/errors', resource: @answer %>');
 <% else %>
   $('.answers').append('<%= j render @answer %>');
   $('#answer_body').val('');
