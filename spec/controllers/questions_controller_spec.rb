@@ -78,22 +78,22 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'PATCH #update' do
     sign_in_user
-
+    let(:question) { create :question, user: @user }
     context 'with valid attributes' do
       it 'assigns the requested question to @question' do
-        patch :update, params: { id: question, question: attributes_for(:question) }
+        patch :update, params: { id: question, question: attributes_for(:question), format: :js }
         expect(assigns(:question)).to eq question
       end
       it 'change question attributes' do
-        patch :update, params: { id: question, question: { title: 'new_title', body: 'new_body' } }
+        patch :update, params: { id: question, question: { title: 'new_title', body: 'new_body' }, format: :js }
         question.reload
         expect(question.title).to eq 'new_title'
         expect(question.body).to eq 'new_body'
       end
 
-      it 'redirects to updated @question' do
-        patch :update, params: { id: question, question: attributes_for(:question) }
-        expect(response).to redirect_to question
+      it 'renders update template' do
+        patch :update, params: { id: question, question: attributes_for(:question), format: :js }
+        expect(response).to render_template :update
       end
     end
 
@@ -101,15 +101,15 @@ RSpec.describe QuestionsController, type: :controller do
       let(:title) { question.title }
 
       before do
-        patch :update, params: { id: question, question: { title: 'new_title', body: nil } }
+        patch :update, params: { id: question, question: { title: 'new_title', body: nil }, format: :js }
       end
       it 'does not change @question attributes' do
         question.reload
         expect(question.title).to eq title
         expect(question.body).to eq 'MyText'
       end
-      it 're-renders edit view' do
-        expect(response).to render_template :edit
+      it 'renders update template' do
+        expect(response).to render_template :update
       end
     end
   end
