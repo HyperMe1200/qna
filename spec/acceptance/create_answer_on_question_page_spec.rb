@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Create question', %q{
+feature 'Create answer', %q{
   In order to create answer for question
   As an authenticated user
   I want to be able to write answer on question page

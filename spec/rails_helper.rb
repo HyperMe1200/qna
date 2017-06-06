@@ -32,6 +32,7 @@ RSpec.configure do |config|
   config.extend ControllerMacros, type: :controller
   config.include AcceptanceMacros, type: :feature
   Capybara.javascript_driver = :webkit
+  Capybara.default_wait_time = 5
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
