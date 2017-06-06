@@ -1,0 +1,5 @@
+<% if @question.errors.any? %>
+  $('#question_title').before('<%= j render 'common/errors', resource: @question %>');
+<% else %>
+  $('div#question-<%= @question.id %>').html('<%= j render @question %>');
+<% end %>
