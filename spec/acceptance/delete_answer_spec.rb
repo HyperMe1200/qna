@@ -17,7 +17,7 @@ feature 'Delete answer', %q{
     expect(page).to_not have_content 'Delete answer'
   end
 
-  scenario 'Delete answer as an author' do
+  scenario 'Delete answer as an author', js: true do
     sign_in(user)
     visit question_path(question)
     click_on 'Delete answer'

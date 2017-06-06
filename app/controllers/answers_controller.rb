@@ -16,7 +16,6 @@ class AnswersController < ApplicationController
     else
       flash[:notice] = 'You cannot delete this answer.'
     end
-    redirect_to @answer.question
   end
 
   def update
