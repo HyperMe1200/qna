@@ -42,7 +42,6 @@ group :development, :test do
   gem 'capybara', '~> 2.13.0'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'database_cleaner'
   gem 'capybara-webkit'
 end
 
