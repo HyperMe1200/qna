@@ -11,10 +11,17 @@ feature 'Select best answer', %q{
   scenario 'Author select best answer', js: true do
     sign_in(author)
     visit question_path(question)
-    click_link('Mark as best', match: :first)
 
     expect(page).to have_link 'Mark as best'
+
+    last_answer = question.answers.last
+
+    within("#answer-#{last_answer.id}") do
+      click_link('Mark as best')
+    end
+
     expect(page).to have_content 'Best answer'
+    expect(first('.answers')).to have_content(last_answer.body)
   end
   scenario 'Authenticated user try to select best answer for not his question' do
     sign_in(user)

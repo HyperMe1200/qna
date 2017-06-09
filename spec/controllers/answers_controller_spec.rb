@@ -80,10 +80,16 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'non author edit answer' do
-      it 'not change answer attributes' do
+      before do
         patch :update, params: { id: answer, answer: { body: 'new_body' }, question_id: question, format: :js }
+      end
+
+      it 'not change answer attributes' do
         answer.reload
         expect(answer.body).to_not eq 'new_body'
+      end
+      it 'show message' do
+        expect(flash[:notice]).to eq('You cannot edit this answer.')
       end
     end
   end
@@ -105,9 +111,14 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'not question author try to set best answer' do
-      it 'not set best to true' do
+      before do
         patch :best, params: { id: question.answers.first, format: :js }
+      end
+      it 'not set best to true' do
         expect(assigns(:answer).best).to eq false
+      end
+      it 'show message' do
+        expect(flash[:notice]).to eq('You cannot select best answer.')
       end
     end
   end

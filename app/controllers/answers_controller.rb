@@ -22,11 +22,17 @@ class AnswersController < ApplicationController
     if current_user.author_of?(@answer)
       @question = @answer.question
       @answer.update(answer_params)
+    else
+      flash[:notice] = 'You cannot edit this answer.'
     end
   end
 
   def best
-    @answer.best! if current_user.author_of?(@answer.question)
+    if current_user.author_of?(@answer.question)
+      @answer.best!
+    else
+      flash[:notice] = 'You cannot select best answer.'
+    end
   end
 
   private
