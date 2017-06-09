@@ -1,0 +1,10 @@
+$('.best-label').remove();
+
+<% if @answer.errors.any? %>
+  $('#answer_body').before('<%= j render 'common/errors', resource: @answer %>');
+<% else %>
+  $('.best').removeClass('best');
+  $('#answer-<%= @answer.id %>').detach().prependTo('.answers');
+  $('#answer-<%= @answer.id %>').prepend('<p class="best-label"> Best answer: </p>')
+  $('#answer-<%= @answer.id %>').addClass('best');
+<% end %>

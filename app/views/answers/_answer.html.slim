@@ -1,10 +1,16 @@
-div id="answer-#{answer.id}"
+div id="answer-#{answer.id}" class="#{'best' if answer.best}"
   - if answer.persisted?
+    -if answer.best
+      .best-label
+        p = 'Best answer:'
     p = answer.body
-    - if user_signed_in? && current_user.author_of?(answer)
-      p = link_to 'Edit answer', '', class: 'edit-answer-link', data: { answer_id: answer.id }
-      p = link_to 'Delete answer', answer, remote: true, method: :delete, class: 'delete-answer-link', data: { answer_id: answer.id }
-      p = form_for answer, html: { id: "edit-answer-#{answer.id}" }, remote: true do |f|
-        p = f.label :body, 'Answer'
-        p = f.text_area :body
-        p = f.submit 'Save'
+    - if user_signed_in?
+      - if current_user.author_of?(answer.question)
+        p = link_to 'Mark as best', best_answer_path(answer), class: 'best-answer-link', data: {answer_id: answer.id}, remote: true, method: :patch
+      - if current_user.author_of?(answer)
+        p = link_to 'Edit answer', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+        p = link_to 'Delete answer', answer, remote: true, method: :delete, class: 'delete-answer-link', data: { answer_id: answer.id }
+        p = form_for answer, html: {id: "edit-answer-#{answer.id}"}, remote: true do |f|
+          p = f.label :body, 'Answer'
+          p = f.text_area :body
+          p = f.submit 'Save'
