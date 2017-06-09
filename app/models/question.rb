@@ -4,7 +4,7 @@ class Question < ApplicationRecord
 
   validates :body, :title, presence: true
 
-  def answers_ordered
-    answers.order(best: :desc)
-  end
+  # def answers_ordered
+  #   answers.order(best: :desc)
+  # end
 end

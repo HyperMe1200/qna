@@ -2,7 +2,7 @@ h1 Question
 .question
  = render @question
 .answers
-  = render @question.answers_ordered
+  = render @question.answers.ordered
 
 = form_for [@question, @answer], remote: true do |f|
   = render 'common/errors', resource: @answer
