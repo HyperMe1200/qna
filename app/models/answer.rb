@@ -1,6 +1,8 @@
 class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :user
+  has_many :attachments, as: :attachable
+  accepts_nested_attributes_for :attachments
 
   validates :body, :question_id, presence: true
   validates :best, uniqueness: { scope: :question_id }, if: :best

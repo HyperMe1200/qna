@@ -5,7 +5,9 @@ RSpec.describe Answer, type: :model do
   it { should validate_presence_of :question_id }
   it { should belong_to(:question) }
   it { should belong_to(:user) }
-
+  it { should have_many(:attachments) }
+  it { should accept_nested_attributes_for :attachments }
+  
   let(:question) { create :question, answers: create_list(:answer, 2) }
   let(:answer) { question.answers.first }
   let(:another_answer) { question.answers.second }
