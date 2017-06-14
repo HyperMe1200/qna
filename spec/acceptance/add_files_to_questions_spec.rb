@@ -5,20 +5,20 @@ feature 'Add files to question', %q{
   As an question author
   I want to be able to attach files
 } do
-  given(:user) { create :user}
+  given(:user) { create :user }
 
   before do
-    sign_in(:user)
+    sign_in(user)
     visit new_question_path
   end
 
   scenario 'User add file when ask question' do
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'Test body'
-    click_on 'Create'
 
     attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
-
-    expect(page).to have_content 'spec_helper.rb'
+    click_on 'Create'
+    attachment = Attachment.last
+    expect(page).to have_link 'spec_helper.rb', href: attachment.file.url
   end
 end

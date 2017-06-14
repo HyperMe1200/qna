@@ -5,7 +5,5 @@ class Question < ApplicationRecord
 
   validates :body, :title, presence: true
 
-  # def answers_ordered
-  #   answers.order(best: :desc)
-  # end
+  accepts_nested_attributes_for :attachments
 end
