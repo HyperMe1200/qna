@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'carrierwave'
+gem 'remotipart'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -44,6 +45,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara-webkit'
+  gem 'database_cleaner'
 end
 
 group :development do
