@@ -4,9 +4,8 @@ div id="answer-#{answer.id}" class="#{'best' if answer.best}"
       .best-label
         p = 'Best answer:'
     p = answer.body
-    ul
-      - answer.attachments.each do |a|
-        li = link_to a.file.identifier, a.file.url
+    = render answer.attachments
+
     - if user_signed_in?
       - if current_user.author_of?(answer.question)
         p = link_to 'Mark as best', best_answer_path(answer), class: 'best-answer-link', data: {answer_id: answer.id}, remote: true, method: :patch
