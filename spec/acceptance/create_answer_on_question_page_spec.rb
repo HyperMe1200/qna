@@ -15,7 +15,6 @@ feature 'Create answer', %q{
 
     fill_in 'Input your answer', with: "answer_body"
     click_on 'Post your answer'
-
     expect(page).to have_content "answer_body"
   end
 

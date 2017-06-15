@@ -68,4 +68,10 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  config.after(:each) do
+    if Rails.env.test? || Rails.env.cucumber?
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads"])
+    end
+  end
 end

@@ -1,6 +1,7 @@
 h1 Question
 .question
- = render @question
+  = render @question
+
 .answers
   = render @question.answers.ordered
 
@@ -8,4 +9,9 @@ h1 Question
   = render 'common/errors', resource: @answer
   p = f.label :body, 'Input your answer:'
   p = f.text_area :body
+  p
+    = f.fields_for :attachments do |a|
+      = render 'attachments/attachment_fields', f: a
+      .links
+        = link_to_add_association 'Upload file', f, :attachments, partial: 'attachments/attachment_fields'
   p = f.submit 'Post your answer'
