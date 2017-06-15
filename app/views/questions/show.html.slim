@@ -13,6 +13,7 @@ h1 Question
   p = f.text_area :body
   p
     = f.fields_for :attachments do |a|
-      = a.label :file
-      = a.file_field :file
+      = render 'attachments/attachment_fields', f: a
+      .links
+        = link_to_add_association 'Upload file', f, :attachments, partial: 'attachments/attachment_fields'
   p = f.submit 'Post your answer'
