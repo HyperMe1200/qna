@@ -1,0 +1,10 @@
+div id="rating-#{votable.class.name.downcase}-#{votable.id}"
+  p = "Rating: #{votable.rating.to_s}"
+div id="error-#{votable.class.name.downcase}-#{votable.id}"
+- if current_user && !current_user.author_of?(votable)
+    table
+      tr
+        td = 'Vote: '
+        td = link_to '+', polymorphic_path([:vote_up, votable]), method: :post, remote: true, data: { type: :json }, class: 'vote_link'
+        td = link_to '-', polymorphic_path([:vote_down, votable]), method: :post, remote: true, data: { type: :json }, class: 'vote_link'
+        td = link_to 'Cancel vote', polymorphic_path([:cancel_vote, votable]), method: :delete, remote: true, data: { type: :json }, class: 'vote_link'

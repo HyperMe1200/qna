@@ -7,3 +7,8 @@ $(document).on 'click', '.edit-question-link', (e) ->
   $(this).hide()
   question_id = $(this).data('questionId')
   $('form#edit-question-' + question_id).show()
+#else
+#  $('#vote-' + votable_with_id).html('')
+#$('#rate-' + votable_with_id).html(votable.rating)
+#$('form#vote-' + votable_with_id).toggle()
+#$('form#clear-vote-' + votable_with_id).toggle()

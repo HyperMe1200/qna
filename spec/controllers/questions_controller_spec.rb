@@ -1,7 +1,10 @@
 require 'rails_helper'
+require_relative 'concerns/votable_spec.rb'
 
 RSpec.describe QuestionsController, type: :controller do
   let(:question) { create :question }
+
+  it_behaves_like 'votable'
 
   describe 'GET #index' do
     let(:questions) { create_list(:question, 2) }

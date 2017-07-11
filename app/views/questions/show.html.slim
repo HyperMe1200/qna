@@ -1,7 +1,7 @@
 h1 Question
 .question
   = render @question
-
+  = render 'votes/vote', votable: @question
 .answers
   = render @question.answers.ordered
 
