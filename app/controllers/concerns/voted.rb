@@ -29,8 +29,11 @@ module Voted
   def vote(direction)
     return already_voted_respond if @votable.already_voted?(current_user)
     return author_vote_respond if current_user.author_of?(@votable)
-    @votable.vote(current_user, direction)
-    success_respond
+    if @votable.vote(current_user, direction)
+      success_respond
+    else
+      error_respond('Something went wrong')
+    end
   end
 
   def already_voted_respond
@@ -45,8 +48,8 @@ module Voted
     error_respond("Author can't vote")
   end
 
-  def json_respond(object, status = 200)
-    render json: { id: @votable.id, object: object, controller: controller_name.singularize }, status: status
+  def json_respond(content, status = 200)
+    render json: { id: @votable.id, content: content, controller: controller_name.singularize }, status: status
   end
 
   def error_respond(message)

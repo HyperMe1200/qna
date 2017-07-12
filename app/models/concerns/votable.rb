@@ -2,7 +2,7 @@ module Votable
   extend ActiveSupport::Concern
 
   included do
-    has_many :votes, as: :votable
+    has_many :votes, as: :votable, autosave: :true
   end
 
   def rating
@@ -10,8 +10,12 @@ module Votable
   end
 
   def vote(user, direction)
+    begin
     value = direction == 'up' ? 1 : -1
-    votes.create(user: user, value: value)
+    votes.create!(user: user, value: value)
+    rescue
+      false
+    end
   end
 
   def already_voted?(user)

@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   concern :votable do
     member do
-      post 'vote_up'
-      post 'vote_down'
-      delete 'cancel_vote'
+      post :vote_up
+      post :vote_down
+      delete :cancel_vote
     end
   end
 
