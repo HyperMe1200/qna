@@ -1,15 +1,16 @@
 require 'rails_helper'
 require_relative 'concerns/votable_spec.rb'
+require_relative 'concerns/attachable_spec.rb'
 
 RSpec.describe Answer, type: :model do
   it { should validate_presence_of :body }
   it { should validate_presence_of :question_id }
   it { should belong_to(:question) }
   it { should belong_to(:user) }
-  it { should have_many(:attachments) }
-  it { should accept_nested_attributes_for :attachments }
 
   it_behaves_like 'votable'
+  it_behaves_like 'attachable'
+
 
   let(:question) { create :question, answers: create_list(:answer, 2) }
   let(:answer) { question.answers.first }
